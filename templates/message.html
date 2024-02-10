@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    body{
+        margin:0;
+        padding:0;
+    }
+    .navdiv{
+        background-color:white;
+        margin:0 ;
+        padding:8px;
+        padding-right:5%;
+        border:none;
+        display: flex;
+  align-items: center;
+  justify-content: right;
+  height:50px;
+    }
+.msgcon,.sendcon{
+    background-color:white;
+    border-radius: 0px 0px 5px 5px;
+    border:none;
+    margin:auto;
+    width:50%;
+    margin-top:10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding:15px;
+}
+.dp{
+    border-radius: 100%;
+    width:40px;
+    height:40px;
+}
+span{
+    margin:0 1%;
+}
+body{
+    background-color: #B0B3B8;
+}
+.sendcon{
+    border-radius:5px 5px 0px 0px;
+}
+#txtmsg{
+    height:50px;
+    margin:0px;
+    border:none;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    border-radius: 3px;
+    width:85%;
+    vertical-align: middle;
+}
+input::-webkit-input-placeholder {
+    font-size: 15px;
+    padding-left:10px;
+    line-height: 3;
+}
+#btnsend{
+    border-radius:5px;
+    vertical-align: middle;
+    width:13%;
+    height:45px;
+    background-color: #ED4A97;
+        margin:0px;
+        border: none;
+color:white;
+
+}
+</style>
+</head>
+<body >
+    <div class="navdiv">
+        <span style="color: white; font-size: 27px; margin-left: auto;"><b><u><a href="/">Home</a></u></b></span>
+       <span>@{{user.username}}</span>
+       <!-- <img class="dp" src="{{user_profile.profileimg.url}}" alt="imgher"> -->
+    </div>
+    <form action="/message" method="POST">
+    <div class="sendcon">
+    
+        {% csrf_token %}
+        <input type="text" name="txtmsg" placeholder="Enter your message here" id="txtmsg">
+        <button type="submit" value="" id="btnsend" >Send</button>
+    
+    </div>
+
+    <div class="msgcon">
+    
+        <table>
+            {% for message in messages %}
+            <tr style="line-height: 20px;">
+                <td>
+                    From<span style="margin-left:20px;">{{message.sender}}</span>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    Message:   {{message.msg}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+
+    </div>
+    
+</form>
+</body>
+</html>
